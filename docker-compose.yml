@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=parking
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    build: .
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - DB_HOST=localhost
+      - DB_USER=admin
+      - DB_PASSWORD=123456
+      - DB_NAME=parking
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
