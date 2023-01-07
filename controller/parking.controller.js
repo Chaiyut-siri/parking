@@ -103,7 +103,7 @@ exports.updateCarleave = async (req, res) => {
   // Validate request
   if ((!req.body.plate)&&(!req.body.plate)) {
       res.status(400).send({
-        message: err.message || "data is incorrect"
+        message: "data is incorrect"
       });
       return;
   }
@@ -167,7 +167,7 @@ exports.findPlateByCarsize = (req, res) => {
   // Validate request
   if (!carsize) {
     res.status(400).send({
-      message: err.message || "data is incorrect"
+      message: "data is incorrect"
     });
     return;
   }
@@ -210,7 +210,7 @@ exports.findAllocatedSlotByCarsize = (req, res) => {
   // Validate request
   if (!carsize) {
     res.status(400).send({
-      message: err.message || "data is incorrect"
+      message: "data is incorrect"
     });
     return;
   }
@@ -253,7 +253,7 @@ exports.findParkingByCarsize = (req, res) => {
   // Validate request
   if (!carsize) {
     res.status(400).send({
-      message: err.message || "data is incorrect"
+      message: "data is incorrect"
     });
     return;
   }
