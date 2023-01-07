@@ -71,3 +71,87 @@ method : get
 url : localhost:3000/parkingbycarsize/? //(small, medium, large)  
 
 ```
+
+## TEST API 
+```
+1. call api : localhost:3000/parkingslot
+send body json : { 
+    "slot" : n } 
+------------------------------------------------------------------
+send n = 5; return {"message": "create parking lot success"}
+send n < 0; return  {"message": "data is incorrect or require a value greater than 0"}
+}
+
+2. call api : localhost:3000/carenter
+send body json : { 
+    "plate" : "plate Number", 
+    "car_size" : "car size" } 
+------------------------------------------------------------------
+send plate = "XXX-1" , car_size = "small" ; return {
+    "message": "car enter success",
+    "plate": "XXX1",
+    "car_size": "large"
+}
+send plate = duplicate ; return {}"message": "Plate number duplicate";
+send car_size = not match ("small","medium","large") ;{"message": "car_size is incorrect"};
+
+3. call api : localhost:3000/carleave
+send body json : { 
+    "plate" : "plate Number"} 
+------------------------------------------------------------------
+send plate = "XXX1" ; return {
+    "message": "car leave success",
+    "plate": "XXX1"
+}
+send plate = not match ; return {}"message": "message": "Not Found Plate";
+
+4. call api : localhost:3000/statusparking
+------------------------------------------------------------------
+return [
+    {
+        "slot": 1,
+        "status": "not available"
+    },
+    {
+        "slot": 2,
+        "status": "available"
+    },...n
+];
+
+5. call api : localhost:3000/platebycarsize?carsize=large  <--- result by car size
+------------------------------------------------------------------
+return [
+    {
+        "plate": "XXX5"
+    },
+    {
+        "plate": "XXX3"
+    }
+];
+
+6. localhost:3000/slotbycarsize?carsize=small  <--- result by car size
+------------------------------------------------------------------
+return [
+    {
+        "slot": 4
+    }
+];
+
+==== get /params
+7. localhost:3000/slotbycarsize/small  <--- result by car size
+------------------------------------------------------------------
+return [
+    {
+        "slot": 1,
+        "plate": "XXX5",
+        "car_size": "large",
+        "status": "not available"
+    },
+    {
+        "slot": 3,
+        "plate": "XXX3",
+        "car_size": "large",
+        "status": "not available"
+    }
+];
+```
