@@ -91,9 +91,10 @@ send plate = "XXX-1" , car_size = "small" ; return {
     "message": "car enter success",
     "plate": "XXX1",
     "car_size": "large"
-}
-send plate = duplicate ; return {}"message": "Plate number duplicate";
+};
+send plate = duplicate ; return {"message": "Plate number duplicate"};
 send car_size = not match ("small","medium","large") ;{"message": "car_size is incorrect"};
+send slot not enough return {"message": "parking lot is full or not have parking slot"};
 
 3. call api : localhost:3000/carleave
 send body json : { 
@@ -102,7 +103,7 @@ send body json : {
 send plate = "XXX1" ; return {
     "message": "car leave success",
     "plate": "XXX1"
-}
+};
 send plate = not match ; return {}"message": "message": "Not Found Plate";
 
 4. call api : localhost:3000/statusparking
